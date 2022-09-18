@@ -1,0 +1,43 @@
+CREATE DATABASE customers_database;
+use cafe_db;
+
+CREATE TABLE customer
+(
+	customerid int  not null auto_increment ,
+    name varchar(45) not null,
+    address varchar(45) not null,
+    primary key(customerid)
+);
+
+CREATE TABLE product
+(
+	productid int  not null auto_increment ,
+    name varchar(45) not null,
+    price DECIMAL(5,2) not null,
+    primary key(productid)
+);
+
+INSERT INTO customer(`name`,`address`)
+VALUES
+("ace","eastblue"),
+("naruto","konoha"),
+("sandip","samakhusi");
+
+INSERT INTO product(`name`,`price`)
+VALUES
+("mashmellow","200"),
+("kitkat","60"),
+("gems","10");
+ 
+ create table orders(
+	id int not null auto_increment,
+    customer_id int not null,
+    product_id int not null,
+	foreign key (customer_id) references customer(customerid),
+    foreign key (product_id) references product(productid),
+	primary key(id));
+    
+    INSERT INTO orders(`customer_id`,`product_id`)
+    VALUES(1,1);
+    
+    SELECT  customer.name ,orders.*FROM customer INNER JOIN orders ON customer.customerid=orders.customer_id;
